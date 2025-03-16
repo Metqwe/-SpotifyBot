@@ -1,15 +1,14 @@
-# Вибір офіційного образу Python
 FROM python:3.10-slim
 
-# Директорія для твого бота
+# Встановлення ffmpeg для spotdl
+RUN apt-get update && apt-get install -y ffmpeg && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
-# Копіюємо requirements.txt і ставимо залежності
+# Встановлюємо Python залежності
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Копіюємо увесь код бота в контейнер
 COPY . .
 
-# Команда для запуску бота
 CMD ["python", "main.py"]
