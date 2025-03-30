@@ -15,9 +15,12 @@ def init_db():
 def add_track(track_id, file_path):
     conn = sqlite3.connect('bot_data.db')
     cursor = conn.cursor()
-    cursor.execute('INSERT INTO tracks (id, file_path) VALUES (?, ?)', (track_id, file_path))
+    cursor.execute('''
+        INSERT OR REPLACE INTO tracks (id, file_path) VALUES (?, ?)
+    ''', (track_id, file_path))
     conn.commit()
     conn.close()
+
 
 def get_track(track_id):
     conn = sqlite3.connect('bot_data.db')
@@ -33,4 +36,12 @@ def get_all_tracks():
     cursor.execute('SELECT id, file_path FROM tracks')
     result = cursor.fetchall()
     conn.close()
+    
     return result
+def delete_track(track_id):
+    conn = sqlite3.connect("bot_data.db")
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM tracks WHERE id = ?", (track_id,))
+    conn.commit()
+    conn.close()
+
