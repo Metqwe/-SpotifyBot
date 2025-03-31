@@ -9,7 +9,7 @@ from datetime import datetime  # 🗓 Для історії обробок
 from aiogram import Bot, Dispatcher, Router, F
 from aiogram.types import Message, FSInputFile, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, KeyboardButton, ReplyKeyboardMarkup
 from aiogram.filters import Command
-from aiogram.client.default import DefaultBotProperties
+from aiogram.client.bot import DefaultBotProperties
 from aiogram.enums import ParseMode
 
 from dotenv import load_dotenv
